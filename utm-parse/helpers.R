@@ -78,7 +78,9 @@ get_utm <- function(f) {
   # drop additional_info and bind the parse utm vals
   q <- v %>%
     dplyr::select(-additional_info) %>%
-    dplyr::bind_cols(., k)
+    dplyr::bind_cols(., k) %>%
+    dplyr::group_by(product_names, utm_source, utm_medium, utm_campaign) %>%
+    dplyr::summarize(price_dollars = sum(original_amount_cents)/100)
   
   # export
   return(q)
