@@ -15,7 +15,7 @@ ui <- fluidPage(
       ),
       tags$hr(),
       radioButtons("filetype", "Download File type:",
-                   choices = c("csv", "tsv")),
+                   choices = c("csv", "tsv", "psv")),
       tags$hr(),
       downloadButton('downloadData', 'Download')
     ),
@@ -54,7 +54,7 @@ server <- function(input, output) {
     # This function should write data to a file given to it by
     # the argument 'file'.
     content = function(file) {
-      sep <- switch(input$filetype, "csv" = ",", "tsv" = "\t")
+      sep <- switch(input$filetype, "csv" = ",", "tsv" = "\t", "psv" = "|")
       
       # Write to a file specified by the 'file' argument
       readr::write_delim(datasetInput(), path = file, delim = sep)
