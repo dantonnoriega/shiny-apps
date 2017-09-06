@@ -1,6 +1,7 @@
 suppressPackageStartupMessages(library(shiny))
 suppressPackageStartupMessages(library(tidyverse))
 
+source('helpers', local = TRUE)
 
 ui <- fluidPage(
   titlePanel("Uploading Files"),
