@@ -114,7 +114,8 @@ get_utm <- function(f) {
     dplyr::left_join(p, by = c('product_names', 'unit_price_dollars')) %>%
     dplyr::select(product, unit_price_dollars, dplyr::starts_with('utm')) %>%
     dplyr::group_by(product, utm_source, utm_medium, utm_campaign) %>%
-    dplyr::summarize(total_dollars = sum(unit_price_dollars), unit_price_dollars = mean(unit_price_dollars), units_sold = n())
+    dplyr::summarize(total_dollars = sum(unit_price_dollars), unit_price_dollars = mean(unit_price_dollars), units_sold = n()) %>%
+    dplyr::arrange(product, total_dollars, utm_source, utm_medium, utm_campaign)
 
 
   # export
